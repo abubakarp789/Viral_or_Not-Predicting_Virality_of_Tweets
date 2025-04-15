@@ -2,7 +2,7 @@
 
 A machine learning application that analyzes tweet content and metadata to predict the likelihood of a tweet going viral.
 
-![Tweet Virality Predictor](https://github.com/yourusername/tweet-virality-predictor/blob/main/img/app_screenshot.png)
+![Tweet Virality Predictor](https://github.com/abubakarp789/Viral_or_Not-Predicting_Virality_of_Tweets/blob/main/Images/app_screenshot.png)
 
 ## Overview
 
