@@ -11,14 +11,48 @@ import pickle
 import joblib
 from sklearn.ensemble import RandomForestClassifier
 import os
+import plotly.express as px
+import plotly.graph_objects as go
+from predict import predict_tweet_virality
 
 # Set page configuration
 st.set_page_config(
     page_title="Tweet Virality Predictor",
-    page_icon="🐦",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    page_icon="��",
+    layout="wide"
 )
+
+# Custom CSS
+st.markdown("""
+    <style>
+    .main {
+        background-color: #f5f5f5;
+    }
+    .stButton>button {
+        background-color: #1DA1F2;
+        color: white;
+    }
+    .prediction-box {
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px 0;
+    }
+    .viral {
+        background-color: #e6ffe6;
+        border: 2px solid #00cc00;
+    }
+    .not-viral {
+        background-color: #ffe6e6;
+        border: 2px solid #ff0000;
+    }
+    .feature-importance {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 10px 0;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 # Define functions for feature extraction
 def get_sentiment(text):
