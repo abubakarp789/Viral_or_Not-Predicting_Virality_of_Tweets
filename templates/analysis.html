@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Overview Section -->
+<div class="row mb-5" data-aos="fade-up">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Tweet Virality Analysis</h2>
+                <p class="lead text-center mb-4">
+                    Explore patterns and insights from our tweet virality dataset
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Model Performance Section -->
+<div class="row mb-5" data-aos="fade-up" data-aos-delay="100">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title mb-4">Model Performance</h3>
+                <div class="text-center">
+                    <img src="{{ url_for('static', filename='images/roc_curve_comparison.png') }}" 
+                         class="img-fluid rounded" 
+                         alt="ROC Curve Comparison">
+                    <p class="mt-3">
+                        <small class="text-muted">
+                            ROC curve comparison showing the performance of different models in predicting tweet virality
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Time Analysis Section -->
+<div class="row mb-5" data-aos="fade-up" data-aos-delay="200">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title mb-4">Time Patterns</h3>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <img src="{{ url_for('static', filename='images/tweets_per_hour.png') }}" 
+                                 class="img-fluid rounded" 
+                                 alt="Tweets per Hour">
+                            <p class="mt-3">
+                                <small class="text-muted">Distribution of tweets throughout the day</small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <img src="{{ url_for('static', filename='images/tweets_per_day.png') }}" 
+                                 class="img-fluid rounded" 
+                                 alt="Tweets per Day">
+                            <p class="mt-3">
+                                <small class="text-muted">Distribution of tweets by day of week</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Analysis Section -->
+<div class="row mb-5" data-aos="fade-up" data-aos-delay="300">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title mb-4">Content Analysis</h3>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <img src="{{ url_for('static', filename='images/hashtag_distribution.png') }}" 
+                                 class="img-fluid rounded" 
+                                 alt="Hashtag Distribution">
+                            <p class="mt-3">
+                                <small class="text-muted">Distribution of hashtag usage in tweets</small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <img src="{{ url_for('static', filename='images/engagement_per_hour.png') }}" 
+                                 class="img-fluid rounded" 
+                                 alt="Engagement per Hour">
+                            <p class="mt-3">
+                                <small class="text-muted">Engagement patterns throughout the day</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sentiment Analysis Section -->
+<div class="row mb-5" data-aos="fade-up" data-aos-delay="400">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title mb-4">Sentiment Analysis</h3>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <img src="{{ url_for('static', filename='images/sentiment_distribution.png') }}" 
+                                 class="img-fluid rounded" 
+                                 alt="Sentiment Distribution">
+                            <p class="mt-3">
+                                <small class="text-muted">Distribution of sentiment in tweets</small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <img src="{{ url_for('static', filename='images/sentiment_engagement_scatter.png') }}" 
+                                 class="img-fluid rounded" 
+                                 alt="Sentiment vs Engagement">
+                            <p class="mt-3">
+                                <small class="text-muted">Relationship between sentiment and engagement</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Feature Analysis Section -->
+<div class="row mb-5" data-aos="fade-up" data-aos-delay="500">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title mb-4">Feature Analysis</h3>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <img src="{{ url_for('static', filename='images/feature_importance.png') }}" 
+                                 class="img-fluid rounded" 
+                                 alt="Feature Importance">
+                            <p class="mt-3">
+                                <small class="text-muted">Relative importance of features in predicting virality</small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <img src="{{ url_for('static', filename='images/numerical_correlation_matrix.png') }}" 
+                                 class="img-fluid rounded" 
+                                 alt="Correlation Matrix">
+                            <p class="mt-3">
+                                <small class="text-muted">Correlations between numerical features</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

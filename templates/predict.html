@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Prediction Form Section -->
+<div class="row mb-5" data-aos="fade-up">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Enter Your Tweet</h2>
+                
+                {% if error %}
+                <div class="alert alert-danger mb-4" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    {{ error }}
+                </div>
+                {% endif %}
+                
+                <form id="predictionForm" action="/predict" method="POST">
+                    <div class="mb-4">
+                        <label for="tweet" class="form-label">Tweet Content</label>
+                        <textarea 
+                            class="form-control" 
+                            id="tweet" 
+                            name="tweet" 
+                            rows="4" 
+                            maxlength="280" 
+                            placeholder="Type your tweet here..."
+                            required
+                        ></textarea>
+                        <div class="form-text text-end">
+                            <span id="charCount">0</span>/280 characters
+                        </div>
+                    </div>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="hour" class="form-label">Posting Hour (0-23)</label>
+                            <input 
+                                type="number" 
+                                class="form-control" 
+                                id="hour" 
+                                name="hour" 
+                                min="0" 
+                                max="23" 
+                                required
+                            >
+                        </div>
+                        <div class="col-md-6">
+                            <label for="day" class="form-label">Day of Week</label>
+                            <select class="form-select" id="day" name="day" required>
+                                <option value="">Select a day</option>
+                                <option value="0">Monday</option>
+                                <option value="1">Tuesday</option>
+                                <option value="2">Wednesday</option>
+                                <option value="3">Thursday</option>
+                                <option value="4">Friday</option>
+                                <option value="5">Saturday</option>
+                                <option value="6">Sunday</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg px-5">
+                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            Predict Virality
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Results Section (Initially Hidden) -->
+{% if prediction %}
+<div class="row mb-5" data-aos="fade-up">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Prediction Results</h2>
+                
+                <!-- Overall Prediction -->
+                <div class="text-center mb-4">
+                    <div class="alert {% if prediction == 'Viral' %}alert-success{% else %}alert-danger{% endif %}">
+                        <h4 class="alert-heading">
+                            {% if prediction == 'Viral' %}
+                            🎉 Your Tweet is likely to go Viral!
+                            {% else %}
+                            😔 Your Tweet might not go Viral
+                            {% endif %}
+                        </h4>
+                        <p class="mb-0">Overall Probability: {{ "%.2f"|format(probability * 100) }}%</p>
+                    </div>
+                </div>
+                
+                <!-- Model Predictions -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="prediction-card text-center">
+                            <h5 class="mb-3">Random Forest</h5>
+                            <div class="prediction-value">
+                                <span class="display-6 fw-bold text-primary">{{ "%.2f"|format(rf_probability * 100) }}%</span>
+                            </div>
+                            <p class="text-muted mb-0">Probability of Virality</p>
+                            <div class="progress mt-3" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" 
+                                     style="width: 0%"
+                                     data-width="{{ "%.0f"|format(rf_probability * 100) }}"
+                                     aria-valuenow="{{ "%.0f"|format(rf_probability * 100) }}" 
+                                     aria-valuemin="0" 
+                                     aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="prediction-card text-center">
+                            <h5 class="mb-3">Logistic Regression</h5>
+                            <div class="prediction-value">
+                                <span class="display-6 fw-bold text-primary">{{ "%.2f"|format(lr_probability * 100) }}%</span>
+                            </div>
+                            <p class="text-muted mb-0">Probability of Virality</p>
+                            <div class="progress mt-3" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" 
+                                     style="width: 0%"
+                                     data-width="{{ "%.0f"|format(lr_probability * 100) }}"
+                                     aria-valuenow="{{ "%.0f"|format(lr_probability * 100) }}" 
+                                     aria-valuemin="0" 
+                                     aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature Analysis -->
+                <div class="feature-analysis">
+                    <h5 class="mb-3">Feature Analysis</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <span class="feature-label">Word Count:</span>
+                                <span class="feature-value">{{ features.word_count }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <span class="feature-label">Hashtag Count:</span>
+                                <span class="feature-value">{{ features.hashtag_count }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <span class="feature-label">URL Count:</span>
+                                <span class="feature-value">{{ features.url_count }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <span class="feature-label">Sentiment Score:</span>
+                                <span class="feature-value sentiment-score {% if features.sentiment > 0 %}text-success{% elif features.sentiment < 0 %}text-danger{% else %}text-muted{% endif %}">
+                                    {{ "%.2f"|format(features.sentiment) }}
+                                    {% if features.sentiment > 0 %}
+                                    <i class="fas fa-smile"></i>
+                                    {% elif features.sentiment < 0 %}
+                                    <i class="fas fa-frown"></i>
+                                    {% else %}
+                                    <i class="fas fa-meh"></i>
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <span class="feature-label">Posting Hour:</span>
+                                <span class="feature-value">
+                                    {{ features.hour }}:00
+                                    {% if features.hour >= 6 and features.hour <= 18 %}
+                                    <i class="fas fa-sun text-warning"></i>
+                                    {% else %}
+                                    <i class="fas fa-moon text-primary"></i>
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <span class="feature-label">Day of Week:</span>
+                                <span class="feature-value">
+                                    {% if features.day_of_week == 0 %}Monday
+                                    {% elif features.day_of_week == 1 %}Tuesday
+                                    {% elif features.day_of_week == 2 %}Wednesday
+                                    {% elif features.day_of_week == 3 %}Thursday
+                                    {% elif features.day_of_week == 4 %}Friday
+                                    {% elif features.day_of_week == 5 %}Saturday
+                                    {% else %}Sunday
+                                    {% endif %}
+                                    {% if features.day_of_week >= 5 %}
+                                    <i class="fas fa-star text-warning"></i>
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="recommendations mt-4">
+                    <h5 class="mb-3">Recommendations</h5>
+                    <div class="row g-3">
+                        {% if features.word_count < 50 %}
+                        <div class="col-md-6">
+                            <div class="recommendation-item">
+                                <i class="fas fa-info-circle text-info me-2"></i>
+                                Consider adding more content to your tweet
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if features.hashtag_count == 0 %}
+                        <div class="col-md-6">
+                            <div class="recommendation-item">
+                                <i class="fas fa-hashtag text-primary me-2"></i>
+                                Add relevant hashtags to increase visibility
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if features.url_count == 0 %}
+                        <div class="col-md-6">
+                            <div class="recommendation-item">
+                                <i class="fas fa-link text-success me-2"></i>
+                                Consider adding a link to provide more value
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if features.sentiment < 0 %}
+                        <div class="col-md-6">
+                            <div class="recommendation-item">
+                                <i class="fas fa-smile text-warning me-2"></i>
+                                Try to maintain a more positive tone
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %} 

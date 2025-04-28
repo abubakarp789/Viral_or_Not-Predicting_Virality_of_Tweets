@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row mb-5" data-aos="fade-up">
+    <div class="col-md-8 mx-auto text-center">
+        <h1 class="display-4 fw-bold mb-4">Tweet Virality Predictor</h1>
+        <p class="lead mb-4">
+            A machine learning app predicting tweet virality using Random Forest and Logistic Regression. Built during the 3-Day Data Analysis Bootcamp at GDGoC UMT.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="/predict" class="btn btn-primary btn-lg px-4">Get Started</a>
+            <a href="/analysis" class="btn btn-outline-primary btn-lg px-4">View Analysis</a>
+        </div>
+    </div>
+</div>
+
+<!-- Tech Stack Section -->
+<div class="row mb-5" data-aos="fade-up" data-aos-delay="100">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body text-center">
+                <h2 class="card-title mb-4">Tech Stack</h2>
+                <div class="d-flex justify-content-center gap-4 flex-wrap">
+                    <div class="tech-icon-stack">
+                        <i class="fab fa-python fa-3x"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="tech-icon-stack">
+                        <i class="fas fa-flask fa-3x"></i>
+                        <span>Flask</span>
+                    </div>
+                    <div class="tech-icon-stack">
+                        <i class="fas fa-brain fa-3x"></i>
+                        <span>scikit-learn</span>
+                    </div>
+                    <div class="tech-icon-stack">
+                        <i class="fas fa-chart-line fa-3x"></i>
+                        <span>pandas</span>
+                    </div>
+                    <div class="tech-icon-stack">
+                        <i class="fas fa-superscript fa-3x"></i>
+                        <span>NumPy</span>
+                    </div>
+                    <div class="tech-icon-stack">
+                        <i class="fas fa-chart-bar fa-3x"></i>
+                        <span>Matplotlib</span>
+                    </div>
+                    <div class="tech-icon-stack">
+                        <i class="fas fa-water fa-3x"></i>
+                        <span>Seaborn</span>
+                    </div>
+                    <div class="tech-icon-stack">
+                        <i class="fas fa-save fa-3x"></i>
+                        <span>Joblib</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="row mb-5" data-aos="fade-up" data-aos-delay="200">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Key Features</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h5 class="mb-3">Dual Model Approach</h5>
+                            <p>Utilizes both Random Forest and Logistic Regression for robust predictions</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h5 class="mb-3">Real-time Analysis</h5>
+                            <p>Instant predictions with comprehensive feature analysis</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h5 class="mb-3">Interactive Dashboard</h5>
+                            <p>User-friendly interface with intuitive controls</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h5 class="mb-3">Visual Insights</h5>
+                            <p>Beautiful visualizations of tweet patterns and trends</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Performance Metrics -->
+<div class="row mb-5" data-aos="fade-up" data-aos-delay="300">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Model Performance</h2>
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="metric-card text-center">
+                            <h3 class="display-6 fw-bold text-primary">85%</h3>
+                            <p class="mb-0">Accuracy</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="metric-card text-center">
+                            <h3 class="display-6 fw-bold text-primary">78%</h3>
+                            <p class="mb-0">Precision</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="metric-card text-center">
+                            <h3 class="display-6 fw-bold text-primary">82%</h3>
+                            <p class="mb-0">Recall</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="metric-card text-center">
+                            <h3 class="display-6 fw-bold text-primary">80%</h3>
+                            <p class="mb-0">F1-Score</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<div class="row mb-5" data-aos="fade-up" data-aos-delay="400">
+    <div class="col-12 text-center">
+        <a href="/predict" class="btn btn-primary btn-lg px-5">Start Predicting Now</a>
+    </div>
+</div>
+{% endblock %} 

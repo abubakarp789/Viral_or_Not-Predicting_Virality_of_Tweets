@@ -33,11 +33,6 @@ ENV/
 
 
 # Models and Data
-models/
-*.joblib
-*.pkl
-*.h5
-*.hdf5
 
 # Logs
 *.log
