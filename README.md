@@ -22,7 +22,8 @@ It combines content, sentiment, and timing features with robust models to delive
 
 ## 🖥️ Live Demo
 
-> _Coming soon: [your-deployment-link]_  
+> **Live App:** [https://viral-or-not-predicting-virality-of.onrender.com/](https://viral-or-not-predicting-virality-of.onrender.com/)
+> 
 > _Or run locally by following the steps below!_
 
 ---
